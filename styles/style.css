@@ -1673,7 +1673,7 @@ table.shoping-cart-table tr td:last-child {
 }
 
 .register-form .form-control-sm {
-    border: none;
+    border:1px orange;
     width: 100%;
     height: 40px;
 }

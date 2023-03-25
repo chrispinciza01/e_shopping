@@ -60,7 +60,7 @@
                                                                       
                                }else{
                                    
-                                   echo " <a class='dropdown-item' href='../e-shop/customer/customer_account.php?customer_profile'><i class='fa fa-user-o'></i> Account </a>";
+                                   echo " <a class='dropdown-item' href='../e_shopping/customer/customer_account.php?customer_profile'><i class='fa fa-user-o'></i> Account </a>";
                                    
                                }
                                  
@@ -77,7 +77,7 @@
                                                                       
                                }else{
                                    
-                                   echo " <a href='../e-shop/customer/customer_account.php?message' class='dropdown-item'> <i class='fa fa-fw fa-envelope'></i> Message</a>";
+                                   echo " <a href='../e_shopping/customer/customer_account.php?message' class='dropdown-item'> <i class='fa fa-fw fa-envelope'></i> Message</a>";
                                    
                                }
                                  
@@ -93,7 +93,7 @@
                                                                       
                                }else{
                                    
-                                   echo " <a href='../e-shop/customer/customer_account.php?my_orders' class='dropdown-item'><i class='fa fa-fw fa-book'></i> order</a>";
+                                   echo " <a href='../e_shopping/customer/customer_account.php?my_orders' class='dropdown-item'><i class='fa fa-fw fa-book'></i> order</a>";
                                    
                                }
                                  
@@ -167,153 +167,43 @@
                         <a href="" class="desktop-item link"> <i class="fa fa-bars"></i> ALL CATEGORIES<span> </span></a>
                         <div class="mega-box">
                             <div class="content">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <h6>Man's Fashions</h6>
-                                            <hr>
-                                            <?php
-                                        
-                                        $get_p_cat = "select * from product_categories where cat_id=1";
-                    
-                                        $run_p_cat = mysqli_query($db,$get_p_cat);
-                    
-                                        while($row_p_cat=mysqli_fetch_array($run_p_cat)){
-                    
-                                        $p_cat_id = $row_p_cat['p_cat_id'];
-                            
-                                        $p_cat_title = $row_p_cat['p_cat_title'];
-                            
-                                        echo "
-                            
-                                            <ul>
-                                               <li><a href='shop_products.php?p_cat=$p_cat_id'> $p_cat_title </a></a></li>
-                                            </ul>   
-                            
-                                         ";
-                            
-                                        }
-                    
-                                     ?>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <h6>Woman's Fashions</h6>
-                                            <hr>
-                                            <?php
-                                        
-                                        $get_p_cat = "select * from product_categories where cat_id=2";
-                    
-                                        $run_p_cat = mysqli_query($db,$get_p_cat);
-                    
-                                        while($row_p_cat=mysqli_fetch_array($run_p_cat)){
-                    
-                                        $p_cat_id = $row_p_cat['p_cat_id'];
-                            
-                                        $p_cat_title = $row_p_cat['p_cat_title'];
-                            
-                                        echo "
-                            
-                                            <ul>
-                                               <li><a href='shop_products.php?p_cat=$p_cat_id'> $p_cat_title </a></a></li>
-                                            </ul>   
-                            
-                                         ";
-                            
-                                        }
-                    
-                                     ?>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <h6>Kid's Fashions</h6>
-                                            <hr>
-                                            <?php
-                                        
-                                        $get_p_cat = "select * from product_categories where cat_id=3";
-                    
-                                        $run_p_cat = mysqli_query($db,$get_p_cat);
-                    
-                                        while($row_p_cat=mysqli_fetch_array($run_p_cat)){
-                    
-                                        $p_cat_id = $row_p_cat['p_cat_id'];
-                            
-                                        $p_cat_title = $row_p_cat['p_cat_title'];
-                            
-                                        echo "
-                            
-                                            <ul>
-                                               <li><a href='shop_products.php?p_cat=$p_cat_id'> $p_cat_title </a></a></li>
-                                            </ul>   
-                            
-                                         ";
-                            
-                                        }
-                    
-                                     ?>
-
-                                            <div class="mt-3">
-                                                <h6>other Fashion</h6>
-                                                <hr>
-                                                <?php
-                                        
-                                        $get_p_cat = "select * from product_categories where cat_id=5";
-                    
-                                        $run_p_cat = mysqli_query($db,$get_p_cat);
-                    
-                                        while($row_p_cat=mysqli_fetch_array($run_p_cat)){
-                    
-                                        $p_cat_id = $row_p_cat['p_cat_id'];
-                            
-                                        $p_cat_title = $row_p_cat['p_cat_title'];
-                            
-                                        echo "
-                            
-                                            <ul>
-                                               <li><a href='shop_products.php?p_cat=$p_cat_id'> $p_cat_title </a></a></li>
-                                            </ul>   
-                            
-                                         ";
-                            
-                                        }
-                    
-                                     ?>
-                                            </div>
+                            <div class="col-md-12">
+                            <div class="row">
 
 
-                                        </div>
+                            <?php
+    // Get main categories
+    $get_cat_query = "SELECT * FROM categories";
+    $run_cat_query = mysqli_query($db, $get_cat_query);
+    
+    while ($row_cat = mysqli_fetch_array($run_cat_query)) {
+        $cat_id = $row_cat['cat_id'];
+        $cat_title = $row_cat['cat_title'];
+        
+        // Get subcategories for current main category
+        $get_p_cat_query = "SELECT * FROM product_categories WHERE cat_id = $cat_id";
+        $run_p_cat_query = mysqli_query($db, $get_p_cat_query);
+        
+        // Output main category title and subcategories in a single row
+        //echo "<div class='col-md-12'>";
+        echo "<div class='col-md-3'>";
+        echo "<h6>$cat_title</h6>";
+        echo "<ul>";
+        while ($row_p_cat = mysqli_fetch_array($run_p_cat_query)) {
+            $p_cat_id = $row_p_cat['p_cat_id'];
+            $p_cat_title = $row_p_cat['p_cat_title'];
+            echo "<li><a href='shop_products.php?p_cat=$p_cat_id'>$p_cat_title</a></li>";
+        }
+        echo "</ul>";
+        echo "</div>"; // Close col-md-12
+        //echo "</div>"; // Close row
+    }
+?>
+                            
 
-                                        <div class="col-md-3">
-
-                                            <h6>baby</h6>
-                                            <hr>
-                                            <?php
-                                        
-                                        $get_p_cat = "select * from product_categories where cat_id=4";
-                    
-                                        $run_p_cat = mysqli_query($db,$get_p_cat);
-                    
-                                        while($row_p_cat=mysqli_fetch_array($run_p_cat)){
-                    
-                                        $p_cat_id = $row_p_cat['p_cat_id'];
                             
-                                        $p_cat_title = $row_p_cat['p_cat_title'];
-                            
-                                        echo "
-                            
-                                            <ul>
-                                               <li><a href='shop_products.php?p_cat=$p_cat_id'> $p_cat_title </a></a></li>
-                                            </ul>   
-                            
-                                         ";
-                            
-                                        }
-                    
-                                     ?>
-                                        </div>
-
-                                    </div>
-                                </div>
+                            </div>
+                            </div>
                             </div>
                         </div>
                     </li>

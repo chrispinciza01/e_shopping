@@ -37,7 +37,7 @@ if(isset($_REQUEST['cat'])&&is_array($_REQUEST['cat'])){
                     echo "
                     <li class='checkbox checkbox-warning'>
 
-                        <a>
+                        <a href=''>
 
                         <label>
 

@@ -56,6 +56,11 @@
 
                 <div class="col-md-6 col-12 sm-6 form-group input-group">
 
+                    <input name="" type="password" class="form-control-sm" id="" placeholder="Re-Enter Password">
+                </div>
+
+                <div class="col-md-6 col-12 sm-6 form-group input-group">
+
                     <input name="customer_contact" class="form-control-sm" placeholder="Phone number" type="text" required>
                 </div>
 
